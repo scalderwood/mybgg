@@ -4,15 +4,15 @@
         "title": ""
     },
     "boardgamegeek": {
-        "user_name": "YOUR_BGG_USERNAME",
+        "user_name": "proudliberal84",
         "extra_params": {
             "own": 1
         }
     },
     "algolia": {
-        "app_id": "YOUR_APP_ID",
-        "api_key_search_only": "YOUR_PUBLIC_API_KEY",
-        "index_name": "YOUR_INDEX_NAME",
-        "hits_per_page": 24
+        "app_id": "CSV196BZTA",
+        "api_key_search_only": "c3d4217ee59c9aa20de004568f62feeb",
+        "index_name": "bgg",
+        "hits_per_page": 40
     }
 }
