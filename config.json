@@ -6,7 +6,8 @@
     "boardgamegeek": {
         "user_name": "proudliberal84",
         "extra_params": {
-            "own": 1
+            "own": 1,
+            "invlocation": ""
         }
     },
     "algolia": {
