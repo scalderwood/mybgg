@@ -7,13 +7,13 @@
         "user_name": "proudliberal84",
         "extra_params": {
             "own": 1,
-            "invlocation": ""
+            "showprivate": 1
         }
     },
     "algolia": {
         "app_id": "CSV196BZTA",
         "api_key_search_only": "c3d4217ee59c9aa20de004568f62feeb",
         "index_name": "bgg",
-        "hits_per_page": 40
+        "hits_per_page": 300
     }
 }

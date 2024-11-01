@@ -4,7 +4,7 @@ from mybgg.models import BoardGame
 
 
 class Downloader():
-    def __init__(self, project_name, cache_bgg, debug=False):
+    def __init__(self, project_name, cache_bgg, debug=False, bgg_username="", bgg_password=""):
         if cache_bgg:
             self.client = BGGClient(
                 cache=CacheBackendSqlite(
@@ -12,10 +12,14 @@ class Downloader():
                     ttl=60 * 60 * 24,
                 ),
                 debug=debug,
+                bgg_username=bgg_username,
+                bgg_password=bgg_password
             )
         else:
             self.client = BGGClient(
                 debug=debug,
+                bgg_username=bgg_username,
+                bgg_password=bgg_password
             )
 
     def collection(self, user_name, extra_params):
@@ -42,6 +46,7 @@ class Downloader():
         game_id_to_tags = {game["id"]: game["tags"] for game in collection_data}
         game_id_to_image = {game["id"]: game["image_version"] or game["image"] for game in collection_data}
         game_id_to_numplays = {game["id"]: game["numplays"] for game in collection_data}
+        game_id_to_inventorylocation = {game["id"]: game["inventorylocation"] for game in collection_data}
 
         game_id_to_players = {game["id"]: [] for game in collection_data}
         for play in plays_data:
@@ -68,7 +73,8 @@ class Downloader():
                 expansions=[
                     BoardGame(expansion_data)
                     for expansion_data in game_id_to_expansion[game_data["id"]]
-                ]
+                ],
+                inventory_location=game_id_to_inventorylocation[game_data["id"]]
             )
             for game_data in games_data
         ]

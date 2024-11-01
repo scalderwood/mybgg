@@ -47,11 +47,15 @@
       </summary>
       <div class="game-details">
         <h2 class="heading">
-          <a href="https://boardgamegeek.com/boardgame/{{{ id }}}">
+          <a href="https://boardgamegeek.com/boardgame/{{{ id }}}" target="_blank">
             {{# helpers.highlight }}{ "attribute": "name" }{{/ helpers.highlight }}
           </a>
         </h2>
         <dl class="properties">
+          <div>
+            <dt>Location</dt>
+            <dd>{{{ inventory_location }}}</dd>
+          </div>
           <div>
             <dt>Players</dt>
             <dd>{{{ players_str }}}</dd>

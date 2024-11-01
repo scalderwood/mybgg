@@ -11,6 +11,8 @@ def main(args):
         project_name=SETTINGS["project"]["name"],
         cache_bgg=args.cache_bgg,
         debug=args.debug,
+        bgg_username=args.bgg_username,
+        bgg_password=args.bgg_password
     )
     collection = downloader.collection(
         user_name=SETTINGS["boardgamegeek"]["user_name"],
@@ -73,7 +75,18 @@ if __name__ == '__main__':
         action='store_true',
         help="Print debug information, such as requests made and responses received."
     )
-
+    parser.add_argument(
+        '--bgg_username',
+        type=str,
+        required=False,
+        help='The BGG username if you want private info to be included about your collection'
+    )
+    parser.add_argument(
+        '--bgg_password',
+        type=str,
+        required=False,
+        help='The BGG password if you want private info to be included about your collection'
+    )
     args = parser.parse_args()
 
     main(args)

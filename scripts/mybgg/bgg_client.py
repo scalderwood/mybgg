@@ -12,11 +12,16 @@ logger = logging.getLogger(__name__)
 class BGGClient:
     BASE_URL = "https://www.boardgamegeek.com/xmlapi2"
 
-    def __init__(self, cache=None, debug=False):
+    def __init__(self, cache=None, debug=False, bgg_username="", bgg_password=""):
         if not cache:
             self.requester = requests.Session()
         else:
             self.requester = cache.cache
+
+        if bool(bgg_username) and bool(bgg_password):
+            response1 = self.requester.post("https://boardgamegeek.com/login/api/v1", json={"credentials": {
+                "username": bgg_username, "password": bgg_password}})
+            response1.raise_for_status()  # This will raise an exception for 4xx and 5xx status codes
 
         if debug:
             logging.basicConfig(level=logging.DEBUG)
@@ -25,6 +30,7 @@ class BGGClient:
         params = kwargs.copy()
         params["username"] = user_name
         data = self._make_request("/collection?version=1", params)
+
         collection = self._collection_to_games(data)
         return collection
 
@@ -181,6 +187,7 @@ class BGGClient:
                         xml.string(".", attribute="wishlist"),
                     ], alias='tags', hooks=xml.Hooks(after_parse=after_status_hook)),
                     xml.integer("numplays"),
+                    xml.string("privateinfo", attribute="inventorylocation", alias="inventorylocation", required=False),
                 ], required=False, alias="items"),
             )
         ])
