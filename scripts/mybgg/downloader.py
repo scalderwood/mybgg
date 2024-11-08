@@ -54,7 +54,7 @@ class Downloader():
                 game_id_to_players[play["game"]["gameid"]].extend(play["players"])
                 game_id_to_players[play["game"]["gameid"]] = list(set(game_id_to_players[play["game"]["gameid"]]))
 
-        games_data = list(filter(lambda x: x["type"] == "boardgame", game_list_data))
+        games_data = list(filter(lambda x: x["type"] in ("boardgame", "boardgameexpansion"), game_list_data))
         expansions_data = list(filter(lambda x: x["type"] == "boardgameexpansion", game_list_data))
 
         game_id_to_expansion = {game["id"]: [] for game in games_data}
